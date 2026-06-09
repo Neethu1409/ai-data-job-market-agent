@@ -1,4 +1,4 @@
-title,company,location,description,salary
+job_title,company,location,description,salary
  Data Engineer ,Tech Corp,Remote,Must know Python.,$100k
 Data engineer,Tech Corp,remote,Must know Python.,$100k
 Senior Data Engineer,Data Inc,New York,Looking for PySpark expert.,

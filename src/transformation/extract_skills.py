@@ -62,22 +62,40 @@ class SkillExtractor:
 
 
 if __name__ == "__main__":
-    # --- Example Usage & Testing ---
+    import pandas as pd
+    import os
+    
+    print("Initializing SkillExtractor...")
     extractor = SkillExtractor()
     
-    sample_jd_1 = """
-    We are looking for a Data Engineer with strong Python and sql skills. 
-    Experience with cloud platforms like AWS or gcp is a must. 
-    Bonus points if you have worked with Snowflake or DataBricks and understand airflow.
-    """
+    input_file = "data/raw/job_postings.csv"
+    output_file = "data/processed/jobs_with_skills.csv"
     
-    sample_jd_2 = """
-    Requires 5+ years of experience. Must be proficient in PySpark, Kafka, and Docker. 
-    Recent experience building AI agents using LangChain and OpenAI APIs is highly preferred.
-    """
-    
-    print("Extracting from Job Description 1:")
-    print(extractor.extract_skills(sample_jd_1))
-    print("-" * 40)
-    print("Extracting from Job Description 2:")
-    print(extractor.extract_skills(sample_jd_2))
+    print(f"Reading data from {input_file}...")
+    try:
+        # Read the raw job postings
+        df = pd.read_csv(input_file)
+        
+        # Ensure 'description' column exists and replace NaNs
+        if 'description' not in df.columns:
+            print("Error: 'description' column missing from input data.")
+        else:
+            df['description'] = df['description'].fillna("")
+            
+            print("Extracting skills from job descriptions...")
+            # Apply the extraction method and join the list into a comma-separated string
+            df['extracted_skills'] = df['description'].apply(
+                lambda desc: ", ".join(extractor.extract_skills(desc))
+            )
+            
+            # Create the output directory if it doesn't exist
+            os.makedirs(os.path.dirname(output_file), exist_ok=True)
+            
+            print(f"Saving processed data to {output_file}...")
+            df.to_csv(output_file, index=False)
+            print("Successfully saved processed data!")
+            
+    except FileNotFoundError:
+        print(f"Error: The file {input_file} was not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")

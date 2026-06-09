@@ -29,3 +29,23 @@ Analyze Data Engineer job postings, extract skills, identify job market trends, 
 - **Immutability of Raw Data:** Raw data is never overwritten.
 - **Reproducibility:** Dependencies are pinned in `requirements.txt`.
 - **Testability:** A dedicated `tests/` directory is prepared for test-driven development.
+
+## How to Run
+
+1. **Setup Environment**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+2. **Run Pipeline Scripts**:
+   - Ingest data: `python src/ingestion/job_ingestion.py`
+   - Extract skills: `python src/transformation/extract_skills.py`
+   - Load to Snowflake (requires env vars): `python src/storage/load_to_snowflake.py`
+
+3. **Run Dashboard & AI Agent**:
+   ```bash
+   streamlit run src/dashboard/app.py
+   ```
+   *Navigate to the AI Chat Agent page to ask questions about the market!*
