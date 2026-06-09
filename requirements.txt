@@ -1,0 +1,26 @@
+# Data Processing & Analysis
+pandas>=2.2.1
+numpy>=1.26.4
+pyarrow>=15.0.2
+
+# Data Ingestion / Web Scraping
+requests>=2.31.0
+beautifulsoup4>=4.12.3
+
+# Storage / Database Connectors
+SQLAlchemy>=2.0.28
+psycopg2-binary>=2.9.9
+
+# AI / NLP Agent
+openai>=1.14.2
+langchain>=0.1.13
+tiktoken>=0.6.0
+scikit-learn>=1.4.1
+
+# Dashboard / UI
+streamlit>=1.32.2
+
+# Testing & Utilities
+pytest>=8.1.1
+python-dotenv>=1.0.1
+pydantic>=2.6.4
